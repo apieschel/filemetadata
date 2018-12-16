@@ -5,6 +5,7 @@ const cors = require('cors');
 
 // require and use "multer"...
 const multer = require('multer');
+const upload = multer();
 const app = express();
 
 app.use(cors());
