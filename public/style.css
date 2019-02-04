@@ -1,10 +1,8 @@
-/****** Main Styling ******/
-
 body {
+	background-color: aliceblue;
+  color: #222;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #222;
-	background-color: #ECF0F1;
 	text-align: center;
 }
 
@@ -28,15 +26,22 @@ a {
 	color: #2574A9;
 }
 
+form {
+  display: flex; 
+  justify-content: center;
+}
+
 input {
   display: block;
   position: relative;
   margin: 10px auto;
 
 }
+
 input#button {
-  width: 230px;
+  width: 200px;
 }
+
 .view {
   position:relative;
   margin: auto;
@@ -45,10 +50,4 @@ input#button {
   padding: 20px;
   width: 60%;
   min-width: 400px;
-}
-/****** Logo Div Styling ******/
-
-img {
-	margin: 20px auto 0 auto;
-	display: block;
 }
