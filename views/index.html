@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html>
-
    <head>
       <title>File Metadata</title>
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
@@ -9,16 +8,14 @@
    </head>
 
    <body>
-
       <div class="container">
         <h1>API Project: File Metadata Microservice</h1>
         <p>
-          When you submit a file, you will receive the file name, size in bytes, and MIME type in a JSON object.
+          When you submit a file via the "Upload" form below, you will receive the file name, size in bytes, and MIME type in a JSON object.
         </p>
 
         <h2>Please Upload a File ...</h2>
         <div class="view">
-          <h4 id="output"></h4>
           <form enctype="multipart/form-data" method="POST" action="/api/fileanalyse">
             <input id="inputfield" type="file" name="upfile">
             <input id="button" type="submit" value="Upload">
@@ -26,6 +23,4 @@
         </div>
       </div>
    </body>
-
-
 </html>

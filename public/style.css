@@ -33,20 +33,29 @@ form {
 
 input {
   display: block;
+  font-size: 18px; 
+  padding: 10px 0;
   position: relative;
   margin: 10px auto;
 
 }
 
 input#button {
+  background: royalblue;
+  border: 1px solid blue;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
   width: 200px;
 }
 
 .view {
+  background: ghostwhite;
   position:relative;
   margin: auto;
   margin-top: 40px;
-  border: 1px  solid  #aaa;
+  border: 1px solid #aaa;
   padding: 20px;
   width: 60%;
   min-width: 400px;

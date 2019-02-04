@@ -1,13 +1,6 @@
 
 # API Project: File Metadata Microservice for freeCodeCamp
 
-###    User stories:
-1. I can submit a form that includes a file upload.
-2. The from file input field  has the "name" attribute set to "upfile". We rely on this in testing.
-3. When I submit something, I will receive the file name and size in bytes within the JSON response
+When you submit a file via the "Upload" form, you will receive the file name, size in bytes, and MIME type in a JSON object.
 
-### Usage :
-* Go to the main page, and upload a file using the provided form.
-
-### Hint:
-* To handle the file uploading you should use the [multer](https://www.npmjs.com/package/multer) npm package.
+File uploading is handled by the [multer](https://www.npmjs.com/package/multer) npm package.
