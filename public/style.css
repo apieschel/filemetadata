@@ -50,6 +50,11 @@ input#button {
   width: 200px;
 }
 
+input#button:hover {
+  background-color: black;
+  border: 1px solid black;
+}
+
 .view {
   background: ghostwhite;
   position:relative;
