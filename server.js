@@ -8,6 +8,8 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({dest: 'uploads/', storage: storage});
 const app = express();
+const AudioContext = require('web-audio-api').AudioContext
+const ac = new AudioContext;
 
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -17,10 +19,7 @@ app.get('/', function (req, res) {
   });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
-  let ac = new AudioContext();
   ac.decodeAudioData(req.file.buffer, function(buffer) {
-         let buffer = buffer;
-        
           const gain = ac.createGain();
           const playSound = ac.createBufferSource();
           playSound.buffer = buffer;
