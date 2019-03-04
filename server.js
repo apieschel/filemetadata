@@ -2,14 +2,10 @@
 
 const express = require('express');
 const cors = require('cors');
-
-// require and use "multer"...
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({dest: 'uploads/', storage: storage});
 const app = express();
-const AudioContext = require('web-audio-api').AudioContext
-const ac = new AudioContext;
 
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -19,7 +15,7 @@ app.get('/', function (req, res) {
   });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
-  ac.decodeAudioData(req.file.buffer, function(buffer) {
+  /*ac.decodeAudioData(req.file.buffer, function(buffer) {
           const gain = ac.createGain();
           const playSound = ac.createBufferSource();
           playSound.buffer = buffer;
@@ -27,7 +23,7 @@ app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) 
           playSound.connect(gain);
           gain.connect(ac.destination);
           playSound.start(0);
-        });     
+        });*/     
   /*res.json(//req.file
     {
       name: req.file.originalname, 
