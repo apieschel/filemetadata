@@ -45,22 +45,29 @@
           });
         });*/
          
-        $('#currentFiles').submit(function(e) {
+        const http = new XMLHttpRequest();
+        const url='/music';
+        http.open("GET", url);
+        http.send();
+         
+        http.onreadystatechange=(e)=> {
           $.ajax({
             url: '/music',
             type: 'get',
             data: $('#currentFiles').serialize(),
             success: function(data) {
-              for(let i = 0; i < data.files[0].length; i++) {
-                let directory = document.createElement("a");
-                directory.href = "/public/music/" + data.files[0][i];
-                directory.innerText = data.files[0][i];
-                document.querySelector("#jsonResult").append(directory);
+              console.log(data);
+              if(data.files[0]) {
+                for(let i = 0; i < data.files[0].length; i++) {
+                  let directory = document.createElement("a");
+                  directory.href = "/public/music/" + data.files[0][i];
+                  directory.innerText = data.files[0][i];
+                  document.querySelector("#jsonResult").append(directory);
+                }
               }
             }
           });
-          e.preventDefault();
-        });
+        }
          
        });
      </script>
