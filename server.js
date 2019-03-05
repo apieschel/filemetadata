@@ -5,7 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, 'public')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + '.wav')
@@ -22,26 +22,16 @@ app.get('/', function (req, res) {
   });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
-  /*ac.decodeAudioData(req.file.buffer, function(buffer) {
-          const gain = ac.createGain();
-          const playSound = ac.createBufferSource();
-          playSound.buffer = buffer;
-          console.log(playSound.buffer);
-          playSound.connect(gain);
-          gain.connect(ac.destination);
-          playSound.start(0);
-        });*/     
   res.json(//req.file
     {
       name: req.file.originalname, 
       size: req.file.size, 
       mimetype: req.file.mimetype,
       path: req.file.path,
-      destination: req.file.destination,
-      buffer: req.file.buffer
+      destination: req.file.destination
     }
   );
-})
+});
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Node.js listening ...');
