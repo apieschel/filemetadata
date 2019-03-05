@@ -14,6 +14,17 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 const app = express();
 
+// https://stackoverflow.com/questions/38104090/how-can-i-read-files-from-directory-and-send-as-json-to-client
+const fs = require('fs');
+const path = process.cwd() + '/public/music/';
+const logs = [];
+function readDirectory(callback){
+    fs.readdir(path, function(err, items) {
+       logs.push(items);
+       callback(logs);       
+    }); 
+}
+
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
 
