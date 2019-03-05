@@ -47,6 +47,9 @@ let logs = [];
 function readDirectory(callback){
   fs.readdir(path, function(err, items) {
      logs.push(items);
+     console.log(path);
+     console.log(items);
+     console.log(logs);
      callback(logs);       
   }); 
 }
@@ -60,6 +63,7 @@ app.get('/', function (req, res) {
 
 app.get('/music', function(req,res){
    logs = []; 
+  path = process.cwd() + '/public/music/';
    readDirectory(function(logFiles){
      res.json({files : logFiles});
    });
@@ -75,8 +79,7 @@ app.get('/music/directory', function(req,res){
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
-  
-  res.json(
+  /*res.json(
     {
       name: req.file.originalname, 
       size: req.file.size, 
@@ -85,8 +88,8 @@ app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) 
       destination: req.file.destination,
       folderName: req.body.title
     }
-  );
-  //res.redirect('/');
+  );*/
+  res.redirect('/');
 });
 
 app.listen(process.env.PORT || 3000, function () {
