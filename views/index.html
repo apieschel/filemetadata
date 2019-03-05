@@ -27,21 +27,22 @@
      
      <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
      <script>
-       $(function() { 
+       $(function() {
+         
+        console.log(files);
+         
         $('#upload').submit(function(e) {
           $.ajax({
             url: '/api/fileanalyse',
             method: 'POST',
             data: $('#upload').serialize(),
             success: function(data) {
-              console.log(data);
-              $('#jsonResult').text("File successfully uploaded!");
+              alert("File successfully uploaded!");
             },
             error:function(error){
               console.log(error.responseText);
              }
           });
-          //e.preventDefault();
         });
        });
      </script>
