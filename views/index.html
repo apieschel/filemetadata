@@ -52,10 +52,10 @@
             data: $('#currentFiles').serialize(),
             success: function(data) {
               for(let i = 0; i < data.files[0].length; i++) {
-                let audio = document.createElement("audio");
-                audio.src = "/public/music/" + data.files[0][i];
-                audio.controls = "true";
-                document.querySelector("#jsonResult").append(audio);
+                let directory = document.createElement("a");
+                directory.href = "/public/music/" + data.files[0][i];
+                directory.innerText = data.files[0][i];
+                document.querySelector("#jsonResult").append(directory);
               }
             }
           });
