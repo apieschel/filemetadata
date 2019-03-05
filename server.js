@@ -22,6 +22,23 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 const app = express();
 
+// security
+const helmet = require('helmet');
+app.use(helmet({
+  frameguard: {
+     action: 'deny'
+  },
+  noCache: true,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'", "https://api.glitch.com"],
+      styleSrc: ["'self'", "https://button.glitch.me"],
+      scriptSrc: ["'self'", "https://code.jquery.com", "https://button.glitch.me", "https://api.glitch.com"],
+      imgSrc: ["'self'", "https://hyperdev.com", "https://glitch.com", "https://cdn.glitch.com", "https://s3.amazonaws.com"]
+    }
+   }
+ }));
+
 // https://stackoverflow.com/questions/38104090/how-can-i-read-files-from-directory-and-send-as-json-to-client
 const fs = require('fs');
 let path = process.cwd() + '/public/music/';
@@ -53,7 +70,7 @@ app.get('/music/directory', function(req,res){
    path = path + req.query.directory;
    console.log(path);
    readDirectory(function(logFiles){
-     res.json({files : logFiles});
+     res.json({files : logFiles, directory: req.query.directory});
    });
 });
 
