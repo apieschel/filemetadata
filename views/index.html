@@ -37,7 +37,12 @@
             type: 'get',
             data: $('#currentFiles').serialize(),
             success: function(data) {
-              console.log('success');
+              for(let i = 0; i < data.files[0].length; i++) {
+                let audio = document.createElement("audio");
+                audio.src = data.files[0][i];
+                audio.controls = "true";
+                $("#jsonResult").append(audio);
+              }
             }
           });
           e.preventDefault();
@@ -58,6 +63,7 @@
                 if(data.files[0]) {
                   let select = document.createElement("select");
                   select.required = "true";
+                  select.name = "directory";
                   for(let i = 0; i < data.files[0].length; i++) {
                     let option = document.createElement("option");
                     console.log(option);

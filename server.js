@@ -49,7 +49,12 @@ app.get('/music', function(req,res){
 });
 
 app.get('/music/directory', function(req,res){
-   console.log(req.query);
+   logs = [];
+   path = path + req.query.directory;
+   console.log(path);
+   readDirectory(function(logFiles){
+     res.json({files : logFiles});
+   });
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
