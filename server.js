@@ -5,6 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log(file);
     cb(null, 'public/music')
   },
   filename: function (req, file, cb) {
@@ -43,9 +44,11 @@ app.get('/music', function(req,res){
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
   const dir = process.cwd() + '/public/music/' + req.body.title;
   console.log(dir);
-  if (!fs.existsSync(dir)) {
+  
+  /*if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
-  }
+  }*/
+  
   res.json(
     {
       name: req.file.originalname, 
