@@ -18,11 +18,12 @@ const app = express();
 const fs = require('fs');
 const path = process.cwd() + '/public/music/';
 const logs = [];
+
 function readDirectory(callback){
-    fs.readdir(path, function(err, items) {
-       logs.push(items);
-       callback(logs);       
-    }); 
+  fs.readdir(path, function(err, items) {
+     logs.push(items);
+     callback(logs);       
+  }); 
 }
 
 app.use(cors());
@@ -31,6 +32,12 @@ app.use('/public', express.static(process.cwd() + '/public'));
 app.get('/', function (req, res) {
      res.sendFile(process.cwd() + '/views/index.html');
   });
+
+app.get('/music', function(req,res){
+    readDirectory(function(logFiles){
+       res.json({files : logFiles});
+   });
+});
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
   /*res.json(

@@ -21,6 +21,9 @@
             <input id="inputfield" type="file" name="upfile" required>
             <input id="button" type="submit" value="Upload">
           </form>
+          <form method="GET" action="/music" id="currentFiles">
+            <input id="getFiles" type="submit" value="Get Files">
+          </form>
           <div id="jsonResult"></div>
         </div>
       </div>
@@ -42,6 +45,19 @@
              }
           });
         });
+         
+        $('#currentFiles').submit(function(e) {
+          $.ajax({
+            url: '/music',
+            type: 'get',
+            data: $('#currentFiles').serialize(),
+            success: function(data) {
+              $('#currentFiles').text(JSON.stringify(data));  
+            }
+          });
+          e.preventDefault();
+        });
+         
        });
      </script>
    </body>
