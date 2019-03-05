@@ -5,7 +5,7 @@ const cors = require('cors');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public')
+    cb(null, 'public/music')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + '.wav')
@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
   });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
-  res.json(//req.file
+  /*res.json(
     {
       name: req.file.originalname, 
       size: req.file.size, 
@@ -30,7 +30,8 @@ app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) 
       path: req.file.path,
       destination: req.file.destination
     }
-  );
+  );*/
+  res.redirect('/');
 });
 
 app.listen(process.env.PORT || 3000, function () {

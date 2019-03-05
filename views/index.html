@@ -34,13 +34,14 @@
             method: 'POST',
             data: $('#upload').serialize(),
             success: function(data) {
-              $('#jsonResult').text(JSON.stringify(data));
+              console.log(data);
+              $('#jsonResult').text("File successfully uploaded!");
             },
             error:function(error){
               console.log(error.responseText);
              }
           });
-          e.preventDefault();
+          //e.preventDefault();
         });
        });
      </script>
