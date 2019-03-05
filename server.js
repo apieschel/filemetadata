@@ -41,7 +41,12 @@ app.get('/music', function(req,res){
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
-  /*res.json(
+  const dir = process.cwd() + '/public/music/' + req.body.title;
+  console.log(dir);
+  if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+  }
+  res.json(
     {
       name: req.file.originalname, 
       size: req.file.size, 
@@ -50,8 +55,8 @@ app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) 
       destination: req.file.destination,
       folderName: req.body.title
     }
-  );*/
-  res.redirect('/');
+  );
+  //res.redirect('/');
 });
 
 app.listen(process.env.PORT || 3000, function () {
