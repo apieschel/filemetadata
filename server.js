@@ -48,12 +48,8 @@ app.get('/music', function(req,res){
    });
 });
 
-app.get('/public/music/:directory', function(req,res){
-   path = process.cwd() + '/public/music/' + req.params.directory;
-   logs = []; 
-   readDirectory(function(logFiles){
-     res.json({files : logFiles});
-   });
+app.get('/music/directory', function(req,res){
+   console.log(req.query);
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {

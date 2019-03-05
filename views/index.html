@@ -20,7 +20,7 @@
             <input id="inputfield" type="file" name="upfile" required>
             <input id="button" type="submit" value="UPLOAD">
           </form>
-          <form method="GET" action="/music" id="currentFiles">
+          <form method="GET" action="/music/directory" id="currentFiles">
             <input id="getFiles" type="submit" value="LOAD .WAV FILES">
           </form>
           <div id="jsonResult"></div>
@@ -30,20 +30,18 @@
      <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
      <script>
        $(document).ready(function() {
-        /*
-        $('#upload').submit(function(e) {
+        
+        $('#currentFiles').submit(function(e) {
           $.ajax({
-            url: '/api/fileanalyse',
-            method: 'POST',
-            data: $('#upload').serialize(),
+            url: '/music/directory',
+            type: 'get',
+            data: $('#currentFiles').serialize(),
             success: function(data) {
-              alert("File successfully uploaded!");
-            },
-            error:function(error){
-              console.log(error.responseText);
-             }
+              console.log('success');
+            }
           });
-        });*/
+          e.preventDefault();
+        });
 
         const http = new XMLHttpRequest();
         const url='/music';
@@ -58,12 +56,16 @@
               success: function(data) {
                 console.log(data);
                 if(data.files[0]) {
+                  let select = document.createElement("select");
+                  select.required = "true";
                   for(let i = 0; i < data.files[0].length; i++) {
-                    let directory = document.createElement("a");
-                    directory.href = "/public/music/" + data.files[0][i];
-                    directory.innerText = data.files[0][i];
-                    document.querySelector("#jsonResult").append(directory);
+                    let option = document.createElement("option");
+                    console.log(option);
+                    option.value = data.files[0][i];
+                    option.innerText = data.files[0][i];
+                    select.append(option);
                   }
+                  document.querySelector("#currentFiles").append(select);
                 }
               }
             });
