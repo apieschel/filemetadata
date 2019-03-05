@@ -29,7 +29,7 @@
      
      <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
      <script>
-       $(function() {
+       $(document).ready(function() {
         /*
         $('#upload').submit(function(e) {
           $.ajax({
@@ -44,31 +44,31 @@
              }
           });
         });*/
-         
+
         const http = new XMLHttpRequest();
         const url='/music';
         http.open("GET", url);
         http.send();
-         
-        http.onreadystatechange=(e)=> {
-          $.ajax({
-            url: '/music',
-            type: 'get',
-            data: $('#currentFiles').serialize(),
-            success: function(data) {
-              console.log(data);
-              if(data.files[0]) {
-                for(let i = 0; i < data.files[0].length; i++) {
-                  let directory = document.createElement("a");
-                  directory.href = "/public/music/" + data.files[0][i];
-                  directory.innerText = data.files[0][i];
-                  document.querySelector("#jsonResult").append(directory);
+        http.onreadystatechange = function() {
+          if(this.readyState == 4) {
+            $.ajax({
+              url: '/music',
+              type: 'get',
+              data: $('#currentFiles').serialize(),
+              success: function(data) {
+                console.log(data);
+                if(data.files[0]) {
+                  for(let i = 0; i < data.files[0].length; i++) {
+                    let directory = document.createElement("a");
+                    directory.href = "/public/music/" + data.files[0][i];
+                    directory.innerText = data.files[0][i];
+                    document.querySelector("#jsonResult").append(directory);
+                  }
                 }
               }
-            }
-          });
-        }
-         
+            });
+          }
+        } 
        });
      </script>
    </body>

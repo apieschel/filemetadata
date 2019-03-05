@@ -30,7 +30,6 @@ let logs = [];
 function readDirectory(callback){
   fs.readdir(path, function(err, items) {
      logs.push(items);
-     console.log(items);
      callback(logs);       
   }); 
 }
