@@ -19,10 +19,10 @@
         <div class="view">
           <form enctype="multipart/form-data" method="POST" action="/api/fileanalyse" id="upload">
             <input id="inputfield" type="file" name="upfile" required>
-            <input id="button" type="submit" value="Upload">
+            <input id="button" type="submit" value="UPLOAD">
           </form>
           <form method="GET" action="/music" id="currentFiles">
-            <input id="getFiles" type="submit" value="Get Files">
+            <input id="getFiles" type="submit" value="GET UPLOADED .WAV FILES">
           </form>
           <div id="jsonResult"></div>
         </div>
@@ -52,7 +52,12 @@
             type: 'get',
             data: $('#currentFiles').serialize(),
             success: function(data) {
-              $('#currentFiles').text(JSON.stringify(data));  
+              for(let i = 0; i < data.files[0].length; i++) {
+                let audio = document.createElement("audio");
+                audio.src = "/public/music/" + data.files[0][i];
+                audio.controls = "true";
+                document.querySelector("#jsonResult").append(audio);
+              }
             }
           });
           e.preventDefault();

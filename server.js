@@ -17,7 +17,7 @@ const app = express();
 // https://stackoverflow.com/questions/38104090/how-can-i-read-files-from-directory-and-send-as-json-to-client
 const fs = require('fs');
 const path = process.cwd() + '/public/music/';
-const logs = [];
+let logs = [];
 
 function readDirectory(callback){
   fs.readdir(path, function(err, items) {
@@ -34,8 +34,9 @@ app.get('/', function (req, res) {
   });
 
 app.get('/music', function(req,res){
-    readDirectory(function(logFiles){
-       res.json({files : logFiles});
+   logs = []; 
+   readDirectory(function(logFiles){
+     res.json({files : logFiles});
    });
 });
 

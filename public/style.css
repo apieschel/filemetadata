@@ -37,7 +37,10 @@ input {
   padding: 10px 0;
   position: relative;
   margin: 10px auto;
+}
 
+input[type="submit"] {
+  padding: 5px 20px;
 }
 
 input#button {
