@@ -5,11 +5,18 @@ const cors = require('cors');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log(file);
-    cb(null, 'public/music')
+    const path = file.fieldname + '-' + Date.now()
+    const dir = process.cwd() + '/public/music/' + path;
+    console.log(dir);
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+    
+    cb(null, 'public/music/'  + path);
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.wav')
+    cb(null, file.fieldname + '-' + Date.now() + '.wav');
   }
 });
 const upload = multer({storage: storage});
@@ -42,12 +49,6 @@ app.get('/music', function(req,res){
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
-  const dir = process.cwd() + '/public/music/' + req.body.title;
-  console.log(dir);
-  
-  /*if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-  }*/
   
   res.json(
     {
