@@ -19,6 +19,7 @@
         <div class="view">
           <form enctype="multipart/form-data" method="POST" action="/api/fileanalyse" id="upload">
             <input id="inputfield" type="file" name="upfile" required>
+            <input type="text" name="title" id="title" required>
             <input id="button" type="submit" value="UPLOAD">
           </form>
           <form method="GET" action="/music" id="currentFiles">
@@ -31,7 +32,7 @@
      <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
      <script>
        $(function() {
-        
+        /*
         $('#upload').submit(function(e) {
           $.ajax({
             url: '/api/fileanalyse',
@@ -44,7 +45,7 @@
               console.log(error.responseText);
              }
           });
-        });
+        });*/
          
         $('#currentFiles').submit(function(e) {
           $.ajax({

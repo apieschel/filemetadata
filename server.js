@@ -47,7 +47,8 @@ app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) 
       size: req.file.size, 
       mimetype: req.file.mimetype,
       path: req.file.path,
-      destination: req.file.destination
+      destination: req.file.destination,
+      folderName: req.body.title
     }
   );*/
   res.redirect('/');
