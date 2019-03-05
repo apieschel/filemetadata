@@ -18,7 +18,7 @@
         <h2>Please Upload a File ...</h2>
         <div class="view">
           <form enctype="multipart/form-data" method="POST" action="/api/fileanalyse" id="upload">
-            <input id="inputfield" type="file" name="upfile">
+            <input id="inputfield" type="file" name="upfile" required>
             <input id="button" type="submit" value="Upload">
           </form>
           <div id="jsonResult"></div>
@@ -27,15 +27,18 @@
      
      <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
      <script>
-       $(function() {
+       $(function() { 
         $('#upload').submit(function(e) {
           $.ajax({
             url: '/api/fileanalyse',
-            type: 'get',
+            method: 'POST',
             data: $('#upload').serialize(),
             success: function(data) {
               $('#jsonResult').text(JSON.stringify(data));
-            }
+            },
+            error:function(error){
+              console.log(error.responseText);
+             }
           });
           e.preventDefault();
         });
